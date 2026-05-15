@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n/context";
+import { basePath } from "@/lib/config";
 
 export default function CollectionsPage() {
   const { t } = useLocale();
@@ -10,7 +11,7 @@ export default function CollectionsPage() {
       {/* Hero */}
       <section className="gradient-shell relative flex h-[400px] items-center justify-center overflow-hidden md:h-[614px]">
         <div className="absolute inset-0 overflow-hidden">
-          <img src="/images/collections-hero.jpeg" alt="GP Collections" className="h-full w-full object-cover opacity-60" />
+          <img src={`${basePath}/images/collections-hero.jpeg`} alt="GP Collections" className="h-full w-full object-cover opacity-60" />
         </div>
         <div className="glass-panel relative z-10 mx-auto flex max-w-2xl flex-col gap-6 rounded-xl p-8 text-center">
           <h1 className="text-[36px] leading-10 tracking-tight text-primary md:text-[60px] md:leading-[60px]">{t("collections.hero.title")}</h1>
@@ -24,7 +25,7 @@ export default function CollectionsPage() {
         <div className="gradient-shell group">
           <div className="glass-panel flex h-full w-full flex-col overflow-hidden md:flex-row">
             <div className="relative h-64 w-full md:h-[500px] md:w-1/2">
-              <img src="/images/iris-hero.jpeg" alt="Iris Enchante Collection" className="h-full w-full object-cover" />
+              <img src={`${basePath}/images/iris-hero.jpeg`} alt="Iris Enchante Collection" className="h-full w-full object-cover" />
             </div>
             <div className="flex w-full flex-col justify-center gap-4 bg-white/50 p-8 backdrop-blur-md md:w-1/2 md:p-12">
               <span className="font-sans text-sm uppercase tracking-widest text-text-secondary">{t("collections.iris.tag")}</span>
@@ -42,7 +43,7 @@ export default function CollectionsPage() {
         <div className="gradient-shell group">
           <div className="glass-panel relative flex h-[400px] w-full flex-col overflow-hidden md:flex-row-reverse">
             <div className="relative h-64 w-full md:h-full md:w-3/5">
-              <img src="/images/pride-hero.jpeg" alt="Pride Collection" className="h-full w-full object-cover" />
+              <img src={`${basePath}/images/pride-hero.jpeg`} alt="Pride Collection" className="h-full w-full object-cover" />
             </div>
             <div className="flex w-full flex-col justify-center gap-4 bg-white/50 p-8 backdrop-blur-md md:w-2/5 md:p-12">
               <span className="font-sans text-sm uppercase tracking-widest text-text-secondary">{t("collections.shine.subtitle")}</span>

@@ -2,6 +2,7 @@
 
 import { useLocale } from "@/lib/i18n/context";
 import { useState, useRef, useCallback } from "react";
+import { basePath } from "@/lib/config";
 
 const PEARL_COLORS = ["#FFFFFF", "#FFD700", "#1F2937", "#8b5a8b", "#C0C0C0"];
 
@@ -67,7 +68,7 @@ export default function BespokePage() {
           </p>
         </div>
         <div className="gradient-shell md:col-span-6 h-[400px] md:h-[600px] overflow-hidden">
-          <img src="/images/bespoke-hero.jpeg" alt="Bespoke Atelier" className="h-full w-full object-cover object-top" />
+          <img src={`${basePath}/images/bespoke-hero.jpeg`} alt="Bespoke Atelier" className="h-full w-full object-cover object-top" />
         </div>
       </section>
 
@@ -95,10 +96,10 @@ export default function BespokePage() {
       {/* Showcase */}
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="gradient-shell h-[400px] md:h-[500px] overflow-hidden">
-          <img src="/images/bespoke-detail.jpeg" alt="Bespoke Detail" className="h-full w-full object-cover" />
+          <img src={`${basePath}/images/bespoke-detail.jpeg`} alt="Bespoke Detail" className="h-full w-full object-cover" />
         </div>
         <div className="gradient-shell h-[400px] md:h-[500px] overflow-hidden">
-          <img src="/images/bespoke-selection.jpeg" alt="Pearl Selection" className="h-full w-full object-cover" />
+          <img src={`${basePath}/images/bespoke-selection.jpeg`} alt="Pearl Selection" className="h-full w-full object-cover" />
         </div>
       </section>
 

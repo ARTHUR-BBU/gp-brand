@@ -2,6 +2,7 @@
 
 import { useLocale } from "@/lib/i18n/context";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { basePath } from "@/lib/config";
 
 export default function ServicesPage() {
   const { t } = useLocale();
@@ -16,7 +17,7 @@ export default function ServicesPage() {
           <p className="max-w-[600px] font-sans text-base text-text-secondary">{t("services.hero.desc")}</p>
         </div>
         <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[400px] md:w-1/2">
-          <img src="/images/services-hero.jpeg" alt="Services" className="h-full w-full object-cover object-top" />
+          <img src={`${basePath}/images/services-hero.jpeg`} alt="Services" className="h-full w-full object-cover object-top" />
         </div>
       </section>
 
@@ -83,7 +84,7 @@ export default function ServicesPage() {
             </div>
           </div>
           <div className="h-[500px] w-full overflow-hidden rounded-lg md:w-2/3">
-            <img src="/images/store-map.jpeg" alt="Store Map" className="h-full w-full object-cover object-top" />
+            <img src={`${basePath}/images/store-map.jpeg`} alt="Store Map" className="h-full w-full object-cover object-top" />
           </div>
         </div>
       </section>

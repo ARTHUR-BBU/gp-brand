@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useLocale } from "@/lib/i18n/context";
+import { basePath } from "@/lib/config";
 
 export function Navbar() {
   const { t, locale, toggle } = useLocale();
@@ -21,7 +22,7 @@ export function Navbar() {
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-4">
         <Link href="/" className="shrink-0">
           <img
-            src={locale === "zh" ? "/images/logo-bilingual.png" : "/images/logo-en.png"}
+            src={locale === "zh" ? `${basePath}/images/logo-bilingual.png` : `${basePath}/images/logo-en.png`}
             alt="GABLILY PREMIER"
             className={locale === "zh" ? "h-14 md:h-16 w-auto object-contain" : "h-8 md:h-10 w-auto object-contain"}
           />

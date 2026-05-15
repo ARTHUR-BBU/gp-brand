@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useLocale } from "@/lib/i18n/context";
+import { basePath } from "@/lib/config";
 
 export default function CraftsmanshipPage() {
   const { t } = useLocale();
@@ -100,7 +101,7 @@ export default function CraftsmanshipPage() {
           <p className="mt-4 max-w-md font-sans text-base text-text-secondary">{t("craft.hero.desc")}</p>
         </div>
         <div className="gradient-shell md:col-span-7 aspect-[4/3] md:aspect-video overflow-hidden relative">
-          <img src="/images/craft-hero.jpeg" alt="Pearl-Layer Essence" className="h-full w-full object-cover" />
+          <img src={`${basePath}/images/craft-hero.jpeg`} alt="Pearl-Layer Essence" className="h-full w-full object-cover" />
           <div className="glass-panel absolute right-8 top-1/4 z-20 flex items-center gap-3 rounded-lg px-4 py-2 hover:scale-105 transition-transform">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
             <div>
@@ -128,7 +129,7 @@ export default function CraftsmanshipPage() {
                   <p className="font-sans text-base text-text-secondary">{t("craft.precision.desc")}</p>
                 </div>
                 <div className="relative w-full md:w-1/2 shrink-0">
-                  <img src="/images/craft-precision.jpeg" alt="Precision Selection" className="w-full h-auto rounded-lg" />
+                  <img src={`${basePath}/images/craft-precision.jpeg`} alt="Precision Selection" className="w-full h-auto rounded-lg" />
                 </div>
               </div>
             </div>

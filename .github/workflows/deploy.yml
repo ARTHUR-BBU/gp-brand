@@ -36,6 +36,7 @@ jobs:
         env:
           NEXT_OUTPUT: export
           NEXT_BASE_PATH: /gp-brand
+          NEXT_PUBLIC_BASE_PATH: /gp-brand
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

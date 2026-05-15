@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n/context";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { basePath } from "@/lib/config";
 
 export default function CategoriesPage() {
   const { t } = useLocale();
@@ -19,7 +20,7 @@ export default function CategoriesPage() {
         {/* Saltwater */}
         <div className="gradient-shell group md:col-span-8">
           <div className="glass-panel relative h-full min-h-[400px] w-full overflow-hidden">
-            <img src="/images/saltwater.jpeg" alt="Saltwater Pearls" className="h-full w-full object-cover object-right" />
+            <img src={`${basePath}/images/saltwater.jpeg`} alt="Saltwater Pearls" className="h-full w-full object-cover object-right" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-0 p-[18px] text-white">
               <h2 className="text-2xl">{t("categories.saltwater.title")}</h2>
@@ -32,7 +33,7 @@ export default function CategoriesPage() {
         {/* Freshwater */}
         <div className="gradient-shell group md:col-span-4">
           <div className="glass-panel relative h-full min-h-[400px] w-full overflow-hidden">
-            <img src="/images/freshwater.jpeg" alt="Freshwater Pearls" className="h-full w-full object-cover" />
+            <img src={`${basePath}/images/freshwater.jpeg`} alt="Freshwater Pearls" className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-0 p-[18px] text-white">
               <h2 className="text-2xl">{t("categories.freshwater.title")}</h2>
@@ -52,7 +53,7 @@ export default function CategoriesPage() {
               <Link href="#" className="inline-flex w-fit items-center justify-center bg-primary px-6 py-3 font-sans text-sm text-on-primary hover:opacity-90">{t("categories.baroque.cta")}</Link>
             </div>
             <div className="relative min-h-[300px] w-full md:h-full md:w-1/2">
-              <img src="/images/baroque.jpeg" alt="Baroque Pearls" className="h-full w-full object-cover" />
+              <img src={`${basePath}/images/baroque.jpeg`} alt="Baroque Pearls" className="h-full w-full object-cover" />
             </div>
           </div>
         </div>

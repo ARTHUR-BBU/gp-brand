@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n/context";
+import { basePath } from "@/lib/config";
 
 export function Footer() {
   const { t } = useLocale();
@@ -11,7 +12,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 px-16 py-16 md:grid-cols-4">
         <div className="flex flex-col justify-between">
           <img
-            src="/images/logo-bilingual.png"
+            src={`${basePath}/images/logo-bilingual.png`}
             alt="GABLILY PREMIER GP 珈珮"
             className="h-12 w-auto object-contain"
           />

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useLocale } from "@/lib/i18n/context";
+import { basePath } from "@/lib/config";
 
 export default function HomePage() {
   const { t } = useLocale();
@@ -199,7 +200,7 @@ export default function HomePage() {
       >
         <div ref={heroImgRef} className="absolute inset-0 z-0 h-[130%] -top-[15%]">
           <img
-            src="/images/hero-01.jpeg"
+            src={`${basePath}/images/hero-01.jpeg`}
             alt=""
             className="h-full w-full object-cover"
           />
@@ -266,7 +267,7 @@ export default function HomePage() {
             <div className="story-img-wrap gradient-shell h-[500px] overflow-hidden md:h-[650px]">
               <div className="glass-panel h-full w-full overflow-hidden">
                 <img
-                  src="/images/story-01.jpeg"
+                  src={`${basePath}/images/story-01.jpeg`}
                   alt="GP 珈珮品牌故事"
                   className="h-full w-full object-cover"
                 />
@@ -288,7 +289,7 @@ export default function HomePage() {
           <div className="grid w-full auto-rows-[280px] grid-cols-1 gap-4 md:grid-cols-3">
             <Link href="/craftsmanship" className="bento-card group gradient-shell md:col-span-2">
               <div className="glass-panel relative h-full w-full overflow-hidden">
-                <img src="/images/craft-02.jpeg" alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={`${basePath}/images/craft-02.jpeg`} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 w-full p-6">
                   <h3 className="text-[28px] leading-tight text-white md:text-[42px]">{t("home.bento.craft.title")}</h3>
@@ -314,14 +315,14 @@ export default function HomePage() {
                     }}
                   />
                 )}
-                <img src="/images/logo-bilingual.png" alt="GP 珈珮" className="relative z-20 h-20 w-auto object-contain opacity-80 transition-transform duration-300 hover:-translate-y-0.5" />
+                <img src={`${basePath}/images/logo-bilingual.png`} alt="GP 珈珮" className="relative z-20 h-20 w-auto object-contain opacity-80 transition-transform duration-300 hover:-translate-y-0.5" />
                 <p className="relative z-20 text-center font-sans text-sm text-text-secondary transition-transform duration-300 hover:-translate-y-0.5">{t("home.bento.logo.desc")}</p>
               </div>
             </Link>
 
             <Link href="/categories" className="bento-card group gradient-shell">
               <div className="glass-panel relative h-full w-full overflow-hidden">
-                <img src="/images/gp-manual-08.png" alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={`${basePath}/images/gp-manual-08.png`} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 w-full p-6">
                   <h3 className="text-xl text-white">{t("home.bento.pearl.title")}</h3>
