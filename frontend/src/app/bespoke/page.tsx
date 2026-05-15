@@ -9,7 +9,7 @@ export default function BespokePage() {
   const { t } = useLocale();
   const [pearls, setPearls] = useState<Array<{ id: number; tx: number; ty: number; color: string; size: number }>>([]);
   const [burst, setBurst] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const steps = [
     { num: "01", titleKey: "bespoke.step1.title", descKey: "bespoke.step1.desc" },
