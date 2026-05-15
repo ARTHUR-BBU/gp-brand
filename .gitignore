@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+.cache/
+.strapi-updater.json
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Strapi
+backend/.cache/
+backend/.tmp/
+backend/public/uploads/*
+!backend/public/uploads/.gitkeep
+backend/database/
+backend/files/
+backend/types/
+
+# Next.js
+frontend/.next/
+frontend/out/
+
+# Docker
+docker-compose.override.yml
+
+# Misc
+*.tsbuildinfo
+
+# 源文件（已复制到 frontend/public/images/）
+pic/
+logo/
+stitch_gp_brand_official_website/
+甲方原始需求文件/
+
+# Claude Code
+.claude/

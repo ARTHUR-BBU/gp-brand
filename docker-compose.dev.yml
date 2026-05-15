@@ -1,0 +1,34 @@
+# 开发环境覆盖配置
+# 使用方式: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      target: develop
+    volumes:
+      - ./backend/src:/opt/app/src
+      - ./backend/config:/opt/app/config
+    ports:
+      - "1337:1337"
+    environment:
+      NODE_ENV: development
+
+  frontend:
+    build:
+      target: dev
+    volumes:
+      - ./frontend/src:/opt/app/src
+      - ./frontend/public:/opt/app/public
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+
+  nginx:
+    # 开发模式下不启动 nginx，直接访问各服务端口
+    profiles:
+      - production
