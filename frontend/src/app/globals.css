@@ -119,3 +119,23 @@ h1, h2, h3 {
 .gradient-shell > * {
   border-radius: calc(var(--radius-lg) - 1px);
 }
+
+/* IGI 分级图标 — 奢侈品级香槟金 / 冷铂银 */
+.igi-icon-gold {
+  background: linear-gradient(135deg, #C9A96E 0%, #A08040 100%);
+  box-shadow: 0 4px 15px rgba(201, 169, 110, 0.3);
+  animation: glow-gold 2.8s ease-in-out infinite;
+}
+.igi-icon-silver {
+  background: linear-gradient(135deg, #94A3B8 0%, #64748B 100%);
+  box-shadow: 0 4px 15px rgba(100, 116, 139, 0.25);
+  animation: glow-silver 2.8s ease-in-out infinite;
+}
+@keyframes glow-gold {
+  0%, 100% { box-shadow: 0 4px 15px rgba(201, 169, 110, 0.3); }
+  50% { box-shadow: 0 4px 24px rgba(201, 169, 110, 0.5); }
+}
+@keyframes glow-silver {
+  0%, 100% { box-shadow: 0 4px 15px rgba(100, 116, 139, 0.25); }
+  50% { box-shadow: 0 4px 24px rgba(100, 116, 139, 0.45); }
+}

@@ -34,24 +34,66 @@ export default function CraftsmanshipPage() {
         ScrollTrigger.getAll().forEach(st => st.kill());
 
         ctx = gsap.context(() => {
-          // 七大要素逐一淡入
-          const factorCards = pageRef.current?.querySelectorAll(".factor-card");
-          if (factorCards && factorCards.length > 0) {
-            factorCards.forEach((card) => {
-              gsap.from(card, {
-                opacity: 0, y: 30, duration: 0.6, ease: "power2.out",
-                scrollTrigger: { trigger: card, start: "top 88%", scrub: 1 },
+          // 七大要素 — 海水飘动效果（pin + scrub）
+          const factorsWrapper = pageRef.current?.querySelector("#factors-pin-wrapper");
+          if (factorsWrapper) {
+            const titleEl = factorsWrapper.querySelector(".factors-title");
+            const cards = factorsWrapper.querySelectorAll(".factor-card");
+            const wavePath = factorsWrapper.querySelector("#factors-wave-path");
+            const waveSvg = factorsWrapper.querySelector("#factors-wave");
+
+            if (cards.length > 0) {
+              const factorsTl = gsap.timeline({
+                scrollTrigger: {
+                  trigger: factorsWrapper,
+                  start: "top 15%",
+                  end: `+=${window.innerHeight * 2.5}`,
+                  pin: true,
+                  scrub: 1.5,
+                },
               });
-            });
+
+              // 标题先淡入
+              if (titleEl) {
+                factorsTl.to(titleEl, {
+                  opacity: 1, y: 0, duration: 1.2, ease: "power2.out",
+                }, 0);
+              }
+
+              // 卡片逐一浮现（大位移 + 缩放弹性）
+              cards.forEach((card, i) => {
+                factorsTl.to(card, {
+                  opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "back.out(1.4)",
+                }, 0.8 + i * 1);
+              });
+
+              // 波浪线条绘制
+              if (wavePath && waveSvg) {
+                const pathEl = wavePath as unknown as SVGPathElement;
+                const pathLen = typeof pathEl.getTotalLength === "function" ? pathEl.getTotalLength() : 1400;
+                gsap.set(wavePath, { strokeDasharray: pathLen, strokeDashoffset: pathLen });
+                gsap.set(waveSvg, { opacity: 1 });
+                factorsTl.to(wavePath, {
+                  strokeDashoffset: 0, duration: 10, ease: "none",
+                }, 0);
+              }
+
+              // 全部浮现后：波浪式轻柔浮动
+              const bobStart = 0.8 + (cards.length - 1) * 1 + 1.2;
+              cards.forEach((card, i) => {
+                factorsTl.to(card, { y: -5, duration: 0.5, ease: "sine.inOut" }, bobStart + i * 0.3);
+                factorsTl.to(card, { y: 0, duration: 0.5, ease: "sine.inOut" }, bobStart + i * 0.3 + 0.5);
+              });
+            }
           }
 
           // IGI 卡片淡入
           const igiCards = pageRef.current?.querySelectorAll(".igi-card");
           if (igiCards && igiCards.length > 0) {
             igiCards.forEach((card) => {
-              gsap.from(card, {
-                opacity: 0, y: 40, duration: 0.8, ease: "power2.out",
-                scrollTrigger: { trigger: card, start: "top 85%", scrub: 1 },
+              gsap.to(card, {
+                opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+                scrollTrigger: { trigger: card, start: "top 88%", scrub: 1 },
               });
             });
           }
@@ -103,14 +145,14 @@ export default function CraftsmanshipPage() {
 
       {/* 七大珍珠价值要素 */}
       <section className="border-t border-border-subtle pt-16">
-        <div className="mb-12 text-center">
-          <h2 className="mb-2 text-3xl text-primary md:text-[40px]">{t("craft.factors.title")}</h2>
-          <p className="font-sans text-sm uppercase tracking-widest text-text-secondary">{t("craft.factors.subtitle")}</p>
-          <p className="mx-auto mt-4 max-w-lg font-sans text-base text-text-secondary">{t("craft.factors.desc")}</p>
-        </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
-          {FACTORS.map((f) => (
-            <div key={f.key} className="factor-card gradient-shell">
+        <div id="factors-pin-wrapper" className="relative pt-4">
+          <div className="factors-title mb-12 text-center" style={{ opacity: 0, transform: "translateY(40px)" }}>
+            <h2 className="mb-2 text-3xl text-primary md:text-[40px]">{t("craft.factors.title")}</h2>
+            <p className="mx-auto mt-4 max-w-lg font-sans text-base text-text-secondary">{t("craft.factors.desc")}</p>
+          </div>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+            {FACTORS.map((f) => (
+              <div key={f.key} className="factor-card gradient-shell" style={{ opacity: 0, transform: "translateY(80px) scale(0.85)" }}>
               <div className="glass-panel flex h-full flex-col items-center gap-3 p-5 text-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full overflow-hidden">
                   <img src={`${basePath}/images/${f.img}`} alt={f.key} className="h-full w-full object-contain" />
@@ -121,7 +163,12 @@ export default function CraftsmanshipPage() {
                 <p className="font-sans text-xs leading-relaxed text-text-secondary">{t(`craft.factor.${f.key}.desc`)}</p>
               </div>
             </div>
-          ))}
+            ))}
+          </div>
+          <svg id="factors-wave" className="pointer-events-none mt-8 w-full" viewBox="0 0 1400 40" preserveAspectRatio="none" style={{ opacity: 0 }}>
+            <path id="factors-wave-path" d="M0,20 Q100,5 200,20 T400,20 T600,20 T800,20 T1000,20 T1200,20 T1400,20" fill="none" stroke="rgba(15,23,42,0.18)" strokeWidth="2.5" />
+            <path d="M0,28 Q120,12 240,28 T480,28 T720,28 T960,28 T1200,28 T1400,28" fill="none" stroke="rgba(15,23,42,0.08)" strokeWidth="1.5" />
+          </svg>
         </div>
       </section>
 
@@ -133,16 +180,17 @@ export default function CraftsmanshipPage() {
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* 洛神 LOREINE */}
-          <div className="igi-card gradient-shell">
+          <div className="igi-card gradient-shell" style={{ opacity: 0, transform: "translateY(40px)" }}>
             <div className="glass-panel flex h-full flex-col p-6 md:p-8">
               <div className="mb-6 flex items-center justify-between">
                 <div>
-                  <span className="inline-block rounded-full bg-primary px-3 py-1 font-sans text-xs text-on-primary">{t("craft.igi.loreine.tag")}</span>
+                  <span className="inline-block rounded-full px-3 py-1 font-sans text-xs font-semibold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #C9A96E, #A08040)' }}>{t("craft.igi.loreine.tag")}</span>
                   <h3 className="mt-3 text-2xl font-semibold tracking-tight text-primary md:text-3xl">{t("craft.igi.loreine.name")}</h3>
                 </div>
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary/20 bg-surface">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                <div className="igi-icon igi-icon-gold flex h-16 w-16 items-center justify-center rounded-full transition-transform hover:scale-110">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="white" className="drop-shadow-sm">
+                    <path d="M3 18l2-10 4 5.5L12 4l3 9.5 4-5.5 2 10H3z" />
+                    <rect x="3" y="18" width="18" height="3" rx="1" />
                   </svg>
                 </div>
               </div>
@@ -158,16 +206,17 @@ export default function CraftsmanshipPage() {
           </div>
 
           {/* 维米尔 VERMEER */}
-          <div className="igi-card gradient-shell">
+          <div className="igi-card gradient-shell" style={{ opacity: 0, transform: "translateY(40px)" }}>
             <div className="glass-panel flex h-full flex-col p-6 md:p-8">
               <div className="mb-6 flex items-center justify-between">
                 <div>
-                  <span className="inline-block rounded-full border border-primary/30 px-3 py-1 font-sans text-xs text-primary">{t("craft.igi.vermeer.tag")}</span>
+                  <span className="inline-block rounded-full px-3 py-1 font-sans text-xs font-semibold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #94A3B8, #64748B)' }}>{t("craft.igi.vermeer.tag")}</span>
                   <h3 className="mt-3 text-2xl font-semibold tracking-tight text-primary md:text-3xl">{t("craft.igi.vermeer.name")}</h3>
                 </div>
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-outline-variant bg-surface">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-tertiary">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                <div className="igi-icon igi-icon-silver flex h-16 w-16 items-center justify-center rounded-full transition-transform hover:scale-110">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="white" className="drop-shadow-sm">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+                    <path d="M10 13l2-2 4 4" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               </div>

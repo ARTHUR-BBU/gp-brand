@@ -1,7 +1,6 @@
 "use client";
 
 import { useLocale } from "@/lib/i18n/context";
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { basePath } from "@/lib/config";
 
 export default function ServicesPage() {
@@ -32,28 +31,26 @@ export default function ServicesPage() {
           <div className="glass-panel flex flex-col gap-4 rounded-xl p-[18px] transition-colors hover:bg-surface-bright">
             <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-surface-container-high">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M8 12l3 3 5-5" />
+                <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-primary">{t("services.care.title")}</h3>
-            <p className="flex-1 font-sans text-base text-text-secondary">{t("services.care.desc")}</p>
+            <p className="flex-1 font-sans text-base text-text-secondary whitespace-pre-line">{t("services.care.desc")}</p>
             <span className="w-fit border-b border-primary pb-[1px] font-sans text-sm text-primary hover:opacity-70 cursor-pointer">
               {t("services.care.cta")}
             </span>
           </div>
-          {/* Authentication */}
+          {/* Wear & Care Advisory */}
           <div className="glass-panel flex flex-col gap-4 rounded-xl p-[18px] transition-colors hover:bg-surface-bright">
             <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-surface-container-high">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0110 0v4" />
+                <path d="M12 3l1.912 5.813L20 10l-6.088 1.187L12 17l-1.912-5.813L4 10l6.088-1.187L12 3z" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-primary">{t("services.auth.title")}</h3>
-            <p className="flex-1 font-sans text-base text-text-secondary">{t("services.auth.desc")}</p>
+            <h3 className="text-lg font-semibold text-primary">{t("services.advisory.title")}</h3>
+            <p className="flex-1 font-sans text-base text-text-secondary">{t("services.advisory.desc")}</p>
             <span className="w-fit border-b border-primary pb-[1px] font-sans text-sm text-primary hover:opacity-70 cursor-pointer">
-              {t("services.auth.cta")}
+              {t("services.advisory.cta")}
             </span>
           </div>
         </div>
